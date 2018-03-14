@@ -5,7 +5,7 @@ import {
 
 const initialState = {
   data: [ {}, ],
-  submitOrNext: 'submit',
+  buttonState: 'submit',
   feedback: 'Correct!',
   error: null,
 };
