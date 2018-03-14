@@ -5,6 +5,8 @@ import {
 
 const initialState = {
   data: [ {}, ],
+  submitOrNext: 'submit',
+  feedback: 'Correct!',
   error: null,
 };
 // Convert to switch statement for readability.

@@ -19,14 +19,15 @@ export class Dashboard extends React.Component {
   }
 
   checkAnswer (value) {
-    return (value.toLowerCase().trim() === this.props.protectedData[8].question_id.answer);
+    return (value.toLowerCase().trim() === this.props.protectedData.question_id.answer);
   }
 
 
   render () {
     let button = (<button>Submit</button >);
     let feedback;
-    if (!this.props.protectedData[0].question_id)
+    console.log(this.props.protectedData);
+    if (!this.props.protectedData.question_id)
       return (
         <div className="dashboard">
           <div className="dashboard-protected-data">
@@ -34,11 +35,11 @@ export class Dashboard extends React.Component {
         </div>
       );
     else {
-      console.log(this.props.protectedData[8].question_id.content);
+      console.log(this.props.protectedData.question_id.content);
       return (
         <div className="dashboard">
           <div className="dashboard-protected-data">
-            {this.props.protectedData[8].question_id.content}
+            {this.props.protectedData.question_id.content}
           </div>
           <div className="answer-section">
             <form onSubmit={ e => this.handleSubmit(e) } >
@@ -63,3 +64,9 @@ const mapStateToProps = (state) => {
 };
 
 export default requiresLogin()(connect(mapStateToProps)(Dashboard));
+
+/*
+data(question/answer info)
+button
+feedback
+*/
