@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect, } from 'react-redux';
-import Parser from 'html-react-parser';
 
 import requiresLogin from './requires-login';
 import { fetchProtectedData, } from '../actions/protected-data';
@@ -11,8 +10,22 @@ export class Dashboard extends React.Component {
     this.props.dispatch(fetchProtectedData());
   }
 
+  handleSubmit (event) {
+    event.preventDefault();
+    const answer = this.input.value;
+    if (this.checkAnswer(answer)) {
+      console.log('Correct!')
+    }
+  }
+
+  checkAnswer (value) {
+    return (value.toLowerCase().trim() === this.props.protectedData[8].question_id.answer);
+  }
+
 
   render () {
+    let button = (<button>Submit</button >);
+    let feedback;
     if (!this.props.protectedData[0].question_id)
       return (
         <div className="dashboard">
@@ -28,7 +41,11 @@ export class Dashboard extends React.Component {
             {this.props.protectedData[8].question_id.content}
           </div>
           <div className="answer-section">
-            <textarea />
+            <form onSubmit={ e => this.handleSubmit(e) } >
+              <input ref={(input) => { this.input = input; }}/>
+              <br/>
+              {button}
+            </form>
           </div>
         </div>
       );
