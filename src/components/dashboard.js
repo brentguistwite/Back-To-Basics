@@ -14,7 +14,7 @@ export class Dashboard extends React.Component {
     event.preventDefault();
     const answer = this.input.value;
     if (this.checkAnswer(answer)) {
-      console.log('Correct!')
+      console.log('Correct!');
     }
   }
 
