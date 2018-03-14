@@ -4,12 +4,13 @@ import {
 } from '../actions/protected-data';
 
 const initialState = {
-  data: '',
+  data: [ {}, ],
   error: null,
 };
 // Convert to switch statement for readability.
 // Convert to spead operator instead of Object.assign.
 export default function reducer (state = initialState, action) {
+  console.log(action)
   if (action.type === FETCH_PROTECTED_DATA_SUCCESS) {
     return Object.assign({}, state, {
       data: action.data,

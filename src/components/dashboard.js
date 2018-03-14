@@ -1,25 +1,38 @@
 import React from 'react';
 import { connect, } from 'react-redux';
+import Parser from 'html-react-parser';
+
 import requiresLogin from './requires-login';
 import { fetchProtectedData, } from '../actions/protected-data';
+import './dashboard.css';
 
 export class Dashboard extends React.Component {
   componentDidMount () {
     this.props.dispatch(fetchProtectedData());
   }
 
+
   render () {
-    return (
-      <div className="dashboard">
-        <div className="dashboard-username">
-                    Username: {this.props.username}
+    if (!this.props.protectedData[0].question_id)
+      return (
+        <div className="dashboard">
+          <div className="dashboard-protected-data">
+          </div>
         </div>
-        <div className="dashboard-name">Name: {this.props.name}</div>
-        <div className="dashboard-protected-data">
-                    Protected data: {this.props.protectedData}
+      );
+    else {
+      console.log(this.props.protectedData[8].question_id.content);
+      return (
+        <div className="dashboard">
+          <div className="dashboard-protected-data">
+            {this.props.protectedData[8].question_id.content}
+          </div>
+          <div className="answer-section">
+            <textarea />
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 }
 
