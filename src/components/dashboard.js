@@ -18,7 +18,7 @@ export class Dashboard extends React.Component {
 
 
   render () {
-    let button = (<button>Submit</button >);
+    const button = (<button>Submit</button >);
     let feedback;
     if (!this.props.protectedData)
       return (
