@@ -12,22 +12,15 @@ export class Dashboard extends React.Component {
 
   handleSubmit (event) {
     event.preventDefault();
-    const answer = this.input.value;
-    if (this.checkAnswer(answer)) {
-      console.log('Correct!');
-    }
-  }
-
-  checkAnswer (value) {
-    return (value.toLowerCase().trim() === this.props.protectedData.question_id.answer);
+    const answer = this.input.value || '';
+    console.log(answer);
   }
 
 
   render () {
     let button = (<button>Submit</button >);
     let feedback;
-    console.log(this.props.protectedData);
-    if (!this.props.protectedData.question_id)
+    if (!this.props.protectedData)
       return (
         <div className="dashboard">
           <div className="dashboard-protected-data">
@@ -35,11 +28,11 @@ export class Dashboard extends React.Component {
         </div>
       );
     else {
-      console.log(this.props.protectedData.question_id.content);
+      console.log(this.props.protectedData);
       return (
         <div className="dashboard">
           <div className="dashboard-protected-data">
-            {this.props.protectedData.question_id.content}
+            {this.props.protectedData.question}
           </div>
           <div className="answer-section">
             <form onSubmit={ e => this.handleSubmit(e) } >
