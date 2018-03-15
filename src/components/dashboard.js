@@ -2,7 +2,7 @@ import React from 'react';
 import { connect, } from 'react-redux';
 
 import requiresLogin from './requires-login';
-import { fetchProtectedData, sendAnswerForValidation } from '../actions/protected-data';
+import { fetchProtectedData, sendAnswerForValidation, } from '../actions/protected-data';
 import './dashboard.css';
 
 export class Dashboard extends React.Component {
@@ -19,7 +19,7 @@ export class Dashboard extends React.Component {
 
   render () {
     const button = (<button>Submit</button >);
-    let feedback;
+    let feedback = 'WRONG';
     if (!this.props.protectedData)
       return (
         <div className="dashboard">
@@ -33,6 +33,9 @@ export class Dashboard extends React.Component {
         <div className="dashboard">
           <div className="dashboard-protected-data">
             {this.props.protectedData.question}
+          </div>
+          <div className="feedback">
+            {feedback}
           </div>
           <div className="answer-section">
             <form onSubmit={ e => this.handleSubmit(e) } >
