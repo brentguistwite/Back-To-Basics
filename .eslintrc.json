@@ -115,6 +115,9 @@
         "functions": "ignore"
       }
     ],
+    "no-unused-vars": [
+      1
+    ],
     "no-lonely-if": [
       0
     ],

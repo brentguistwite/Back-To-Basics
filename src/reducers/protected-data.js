@@ -1,11 +1,12 @@
 import {
   FETCH_PROTECTED_DATA_SUCCESS,
   FETCH_PROTECTED_DATA_ERROR,
+  ANSWER_SUBMISSION_SUCCESS,
 } from '../actions/protected-data';
 
 const initialState = {
   data: [ {}, ],
-  buttonState: 'submit',
+  buttonState: 'Submit',
   feedback: 'Correct!',
   error: null,
 };
@@ -16,9 +17,16 @@ export default function reducer (state = initialState, action) {
     return Object.assign({}, state, {
       data: action.data,
       error: null,
+      buttonState: 'Submit',
     });
   case FETCH_PROTECTED_DATA_ERROR:
     return Object.assign({}, state, {error: action.error,});
+  case ANSWER_SUBMISSION_SUCCESS:
+    return Object.assign({}, state, {
+      feedback: action.feedback,
+      error: null,
+      buttonState: 'Next',
+    });
   default:
     return state;
   }
