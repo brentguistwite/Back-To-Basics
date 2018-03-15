@@ -32,9 +32,9 @@ export const fetchProtectedData = () => (dispatch, getState) => {
 };
 
 export const ANSWER_SUBMISSION_SUCCESS = 'ANSWER_SUBMISSION_SUCCESS';
-export const answerSubmissionSuccess = data => ({
+export const answerSubmissionSuccess = feedback => ({
   type: ANSWER_SUBMISSION_SUCCESS,
-  data,
+  feedback,
 });
 
 export const sendAnswerForValidation = answer => (dispatch, getState) => {
@@ -42,9 +42,10 @@ export const sendAnswerForValidation = answer => (dispatch, getState) => {
   const id = getState().auth.currentUser.id;
   return fetch(`${API_BASE_URL}/users/${id}`, {
     method: 'PUT',
-    body: JSON.stringify(answer),
+    body: JSON.stringify({ answer,}),
     headers: {
       // Provide our auth token as credentials
+      'Content-Type': 'application/json',
       Authorization: `Bearer ${authToken}`,
     },
   })
