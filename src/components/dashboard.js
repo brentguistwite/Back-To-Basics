@@ -19,9 +19,9 @@ export class Dashboard extends React.Component {
     } else {
       this.props.dispatch(fetchProtectedData());
       this.input.disabled = false;
+      this.input.value = '';
+      this.input.focus();
     }
-    this.input.value = '';
-    this.input.focus();
   }
 
 
@@ -33,12 +33,11 @@ export class Dashboard extends React.Component {
     } else {
       button = (<button>Next</button>);
     }
-
     let feedback;
     if (this.props.feedback === true) {
       feedback = 'Correct!';
     } else if (this.props.feedback === false) {
-      feedback = `Incorrect, the answer is "${this.props.protectedData.answer}"`;
+      feedback = `Incorrect, the answer is "${this.props.protectedData.answer}". You entered, "${this.input.value}"`;
     }
     if (!this.props.protectedData)
       return (
@@ -66,6 +65,8 @@ export class Dashboard extends React.Component {
               <br />
               {button}
             </form>
+            Successful attempts: {feedback === 'Correct!'? this.props.timesCorrect + 1 : this.props.timesCorrect}<br/>
+            Overall attempts: {!feedback ? this.props.timesSeen : this.props.timesSeen + 1}
           </div>
         </div>
       );
@@ -81,6 +82,8 @@ const mapStateToProps = (state) => {
     username: state.auth.currentUser.username,
     name: `${currentUser.firstName} ${currentUser.lastName}`,
     protectedData: state.protectedData.data,
+    timesSeen: state.protectedData.timesSeen,
+    timesCorrect: state.protectedData.timesCorrect,
   };
 };
 
