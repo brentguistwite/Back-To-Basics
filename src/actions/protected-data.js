@@ -42,7 +42,7 @@ export const sendAnswerForValidation = answer => (dispatch, getState) => {
   const id = getState().auth.currentUser.id;
   return fetch(`${API_BASE_URL}/users/${id}`, {
     method: 'PUT',
-    body: JSON.stringify({ answer,}),
+    body: JSON.stringify({ answer, }),
     headers: {
       // Provide our auth token as credentials
       'Content-Type': 'application/json',

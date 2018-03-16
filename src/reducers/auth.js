@@ -14,7 +14,7 @@ const initialState = {
 };
 // Convert to switch statement for readability.
 // Convert to spead operator instead of Object.assign.
-export default function reducer (state = initialState, action) {
+export default function reducer(state = initialState, action) {
   switch (action.type) {
   case SET_AUTH_TOKEN:
     return Object.assign({}, state, { authToken: action.authToken, });

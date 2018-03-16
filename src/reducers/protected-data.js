@@ -5,7 +5,7 @@ import {
 } from '../actions/protected-data';
 
 const initialState = {
-  data: [ {}, ],
+  data: {},
   buttonState: 'Submit',
   feedback: '',
   error: null,
@@ -13,8 +13,8 @@ const initialState = {
   timesCorrect: 0,
 };
 // Convert to spead operator instead of Object.assign.
-export default function reducer (state = initialState, action) {
-  console.log(action);
+export default function reducer(state = initialState, action) {
+  console.log('CHECK ME OUT', action);
   switch (action.type) {
   case FETCH_PROTECTED_DATA_SUCCESS:
     return Object.assign({}, state, {
@@ -23,15 +23,16 @@ export default function reducer (state = initialState, action) {
       timesSeen: action.data.timesSeen,
       timesCorrect: action.data.timesCorrect,
       error: null,
+      feedback: '',
     });
-  case FETCH_PROTECTED_DATA_ERROR:
-    return Object.assign({}, state, {error: action.error,});
   case ANSWER_SUBMISSION_SUCCESS:
     return Object.assign({}, state, {
       feedback: action.feedback,
       error: null,
       buttonState: 'Next',
     });
+  case FETCH_PROTECTED_DATA_ERROR:
+    return Object.assign({}, state, { error: action.error, });
   default:
     return state;
   }

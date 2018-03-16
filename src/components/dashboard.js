@@ -6,24 +6,43 @@ import { fetchProtectedData, sendAnswerForValidation, } from '../actions/protect
 import './dashboard.css';
 
 export class Dashboard extends React.Component {
-  componentDidMount () {
+  componentDidMount() {
     this.props.dispatch(fetchProtectedData());
   }
 
-  handleSubmit (event) {
+  handleSubmit(event) {
     event.preventDefault();
-    const answer = this.input.value || '';
-    this.props.dispatch(sendAnswerForValidation(answer));
+    const answer = this.input.value;
+    if (this.props.buttonState === 'Submit') {
+      this.props.dispatch(sendAnswerForValidation(answer));
+    } else {
+      this.props.dispatch(fetchProtectedData());
+    }
+    this.input.value = '';
+    this.input.focus();
   }
 
+  // BREAK THIS SPAGHETTI INTO SEPARATE COMPONENTS
+  render() {
+    let button;
+    if (this.props.buttonState === 'Submit') {
+      button = (<button>Submit</button >);
+    } else {
+      button = (<button>Next</button>);
+    }
 
-  render () {
-    const button = (<button>Submit</button >);
     let feedback;
+    if (this.props.feedback === true) {
+      feedback = 'Correct!';
+    } else if (this.props.feedback === false) {
+      feedback = `Incorrect, the answer is "${this.props.protectedData.answer}"`;
+    }
+    console.log(feedback);
     if (!this.props.protectedData)
       return (
         <div className="dashboard">
           <div className="dashboard-protected-data">
+
           </div>
         </div>
       );
@@ -38,9 +57,9 @@ export class Dashboard extends React.Component {
             {feedback}
           </div>
           <div className="answer-section">
-            <form onSubmit={ e => this.handleSubmit(e) } >
-              <input ref={(input) => { this.input = input; }}/>
-              <br/>
+            <form onSubmit={(e) => { this.handleSubmit(e); }} >
+              <input ref={(input) => { this.input = input; }} />
+              <br />
               {button}
             </form>
           </div>

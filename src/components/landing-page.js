@@ -5,7 +5,7 @@ import { Redirect, } from 'react-router-dom';
 import LoginForm from './login-form';
 import './landing-page.css';
 
-export function LandingPage (props) {
+export function LandingPage(props) {
   // If we are logged in redirect straight to the user's dashboard
   if (props.loggedIn) {
     return <Redirect to="/dashboard" />;
@@ -18,6 +18,6 @@ export function LandingPage (props) {
   );
 }
 
-const mapStateToProps = state => ({loggedIn: state.auth.currentUser !== null,});
+const mapStateToProps = state => ({ loggedIn: state.auth.currentUser !== null, });
 
 export default connect(mapStateToProps)(LandingPage);

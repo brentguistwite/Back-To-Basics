@@ -127,10 +127,6 @@
     "space-before-blocks": [
       1
     ],
-    "space-before-function-paren": [
-      "error",
-      "always"
-    ],
     "arrow-parens": [
       1,
       "as-needed",
