@@ -1,8 +1,29 @@
-.dashboard-protected-data {
-  white-space: pre-line;
+.answer-section, .question, .results {
   text-align: center;
 }
 
-.answer-section, .feedback {
-  text-align: center;
+.question {
+  white-space: pre-line;
+  font-size: 34px;
+  padding: 25px 250px;
+}
+
+.results {
+  padding: 25px;
+}
+
+.answer-section button {
+  margin: 10px;
+  height: 25px;
+  width: 175px;
+  background-color: rgb(45, 45, 45);
+  border: none;
+  color: white;
+}
+
+.answer-section input {
+  margin: 10px;
+  height: 25px;
+  width: 225px;
+  color: rgb(45, 45, 45);
 }

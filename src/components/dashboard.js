@@ -15,12 +15,15 @@ export class Dashboard extends React.Component {
     const answer = this.input.value;
     if (this.props.buttonState === 'Submit') {
       this.props.dispatch(sendAnswerForValidation(answer));
+      this.input.disabled = true;
     } else {
       this.props.dispatch(fetchProtectedData());
+      this.input.disabled = false;
+      this.input.value = '';
+      this.input.focus();
     }
-    this.input.value = '';
-    this.input.focus();
   }
+
 
   // BREAK THIS SPAGHETTI INTO SEPARATE COMPONENTS
   render() {
@@ -30,14 +33,12 @@ export class Dashboard extends React.Component {
     } else {
       button = (<button>Next</button>);
     }
-
     let feedback;
     if (this.props.feedback === true) {
       feedback = 'Correct!';
     } else if (this.props.feedback === false) {
-      feedback = `Incorrect, the answer is "${this.props.protectedData.answer}"`;
+      feedback = `Incorrect, the answer is "${this.props.protectedData.answer}". You entered, "${this.input.value}"`;
     }
-    console.log(feedback);
     if (!this.props.protectedData)
       return (
         <div className="dashboard">
@@ -47,21 +48,25 @@ export class Dashboard extends React.Component {
         </div>
       );
     else {
-      console.log(this.props.protectedData);
       return (
         <div className="dashboard">
-          <div className="dashboard-protected-data">
+          <div className="question">
             {this.props.protectedData.question}
-          </div>
-          <div className="feedback">
             {feedback}
           </div>
           <div className="answer-section">
             <form onSubmit={(e) => { this.handleSubmit(e); }} >
-              <input ref={(input) => { this.input = input; }} />
+              <input
+                required
+                ref={(input) => { this.input = input; }}
+              />
               <br />
               {button}
             </form>
+          </div>
+          <div className="results">
+            Successful attempts: {feedback === 'Correct!' ? this.props.timesCorrect + 1 : this.props.timesCorrect}<br />
+            Overall attempts: {!feedback ? this.props.timesSeen : this.props.timesSeen + 1}
           </div>
         </div>
       );
@@ -77,6 +82,8 @@ const mapStateToProps = (state) => {
     username: state.auth.currentUser.username,
     name: `${currentUser.firstName} ${currentUser.lastName}`,
     protectedData: state.protectedData.data,
+    timesSeen: state.protectedData.timesSeen,
+    timesCorrect: state.protectedData.timesCorrect,
   };
 };
 
