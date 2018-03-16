@@ -4,6 +4,8 @@ import { Link, } from 'react-router-dom';
 import './header-bar.css';
 import { clearAuth, } from '../actions/auth';
 import { clearAuthToken, } from '../local-storage';
+import LoginForm from './login-form';
+
 
 export class HeaderBar extends React.Component {
   logOut () {
@@ -21,7 +23,7 @@ export class HeaderBar extends React.Component {
     }
     else{
       logOutButton = (
-        <Link to="/register">SIGN UP</Link>
+        <Link to="/register">SIGN IN</Link>
       );
     }
     return (
