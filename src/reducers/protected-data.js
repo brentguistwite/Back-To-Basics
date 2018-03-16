@@ -14,7 +14,6 @@ const initialState = {
 };
 // Convert to spead operator instead of Object.assign.
 export default function reducer(state = initialState, action) {
-  console.log('CHECK ME OUT', action);
   switch (action.type) {
   case FETCH_PROTECTED_DATA_SUCCESS:
     return Object.assign({}, state, {
