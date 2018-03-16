@@ -1,8 +1,4 @@
-.dashboard-protected-data {
+.answer-section, .feedback, .question {
   white-space: pre-line;
-  text-align: center;
-}
-
-.answer-section, .feedback {
   text-align: center;
 }

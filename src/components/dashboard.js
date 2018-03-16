@@ -50,7 +50,7 @@ export class Dashboard extends React.Component {
     else {
       return (
         <div className="dashboard">
-          <div className="dashboard-protected-data">
+          <div className="question">
             {this.props.protectedData.question}
           </div>
           <div className="feedback">

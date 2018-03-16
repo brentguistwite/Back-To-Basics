@@ -23,7 +23,7 @@ export class HeaderBar extends React.Component {
     }
     else {
       logOutButton = (
-        <Link to="/register">SIGN IN</Link>
+        <Link to="/register">SIGN UP</Link>
       );
     }
     return (
