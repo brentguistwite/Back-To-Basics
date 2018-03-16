@@ -2,49 +2,64 @@ import React from 'react';
 import { connect, } from 'react-redux';
 
 import requiresLogin from './requires-login';
-import { fetchProtectedData, } from '../actions/protected-data';
+import { fetchProtectedData, sendAnswerForValidation, } from '../actions/protected-data';
 import './dashboard.css';
 
 export class Dashboard extends React.Component {
-  componentDidMount () {
+  componentDidMount() {
     this.props.dispatch(fetchProtectedData());
   }
 
-  handleSubmit (event) {
+  handleSubmit(event) {
     event.preventDefault();
     const answer = this.input.value;
-    if (this.checkAnswer(answer)) {
-      console.log('Correct!');
+    if (this.props.buttonState === 'Submit') {
+      this.props.dispatch(sendAnswerForValidation(answer));
+    } else {
+      this.props.dispatch(fetchProtectedData());
     }
+    this.input.value = '';
+    this.input.focus();
   }
 
-  checkAnswer (value) {
-    return (value.toLowerCase().trim() === this.props.protectedData.question_id.answer);
-  }
+  // BREAK THIS SPAGHETTI INTO SEPARATE COMPONENTS
+  render() {
+    let button;
+    if (this.props.buttonState === 'Submit') {
+      button = (<button>Submit</button >);
+    } else {
+      button = (<button>Next</button>);
+    }
 
-
-  render () {
-    let button = (<button>Submit</button >);
     let feedback;
-    console.log(this.props.protectedData);
-    if (!this.props.protectedData.question_id)
+    if (this.props.feedback === true) {
+      feedback = 'Correct!';
+    } else if (this.props.feedback === false) {
+      feedback = `Incorrect, the answer is "${this.props.protectedData.answer}"`;
+    }
+    console.log(feedback);
+    if (!this.props.protectedData)
       return (
         <div className="dashboard">
           <div className="dashboard-protected-data">
+
           </div>
         </div>
       );
     else {
-      console.log(this.props.protectedData.question_id.content);
+      console.log(this.props.protectedData);
       return (
         <div className="dashboard">
           <div className="dashboard-protected-data">
-            {this.props.protectedData.question_id.content}
+            {this.props.protectedData.question}
+          </div>
+          <div className="feedback">
+            {feedback}
           </div>
           <div className="answer-section">
-            <form onSubmit={ e => this.handleSubmit(e) } >
-              <input ref={(input) => { this.input = input; }}/>
-              <br/>
+            <form onSubmit={(e) => { this.handleSubmit(e); }} >
+              <input ref={(input) => { this.input = input; }} />
+              <br />
               {button}
             </form>
           </div>

@@ -5,11 +5,11 @@ import { login, } from '../actions/auth';
 import { required, nonEmpty, } from '../validators';
 
 export class LoginForm extends React.Component {
-  onSubmit (values) {
+  onSubmit(values) {
     return this.props.dispatch(login(values.username, values.password));
   }
 
-  render () {
+  render() {
     let error;
     if (this.props.error) {
       error = (
@@ -31,7 +31,7 @@ export class LoginForm extends React.Component {
           type="text"
           name="username"
           id="username"
-          validate={[ required, nonEmpty, ]}
+          validate={[required, nonEmpty,]}
         />
         <label htmlFor="password">Password</label>
         <Field
@@ -39,10 +39,10 @@ export class LoginForm extends React.Component {
           type="password"
           name="password"
           id="password"
-          validate={[ required, nonEmpty, ]}
+          validate={[required, nonEmpty,]}
         />
         <button className="log-in" disabled={this.props.pristine || this.props.submitting}>
-                    Log in
+          Log in
         </button>
       </form>
     );

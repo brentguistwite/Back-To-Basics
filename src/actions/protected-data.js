@@ -30,3 +30,29 @@ export const fetchProtectedData = () => (dispatch, getState) => {
       dispatch(fetchProtectedDataError(err));
     });
 };
+
+export const ANSWER_SUBMISSION_SUCCESS = 'ANSWER_SUBMISSION_SUCCESS';
+export const answerSubmissionSuccess = feedback => ({
+  type: ANSWER_SUBMISSION_SUCCESS,
+  feedback,
+});
+
+export const sendAnswerForValidation = answer => (dispatch, getState) => {
+  const authToken = getState().auth.authToken;
+  const id = getState().auth.currentUser.id;
+  return fetch(`${API_BASE_URL}/users/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify({ answer, }),
+    headers: {
+      // Provide our auth token as credentials
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${authToken}`,
+    },
+  })
+    .then(res => normalizeResponseErrors(res))
+    .then(res => res.json())
+    .then(data => dispatch(answerSubmissionSuccess(data)))
+    .catch((err) => {
+      dispatch(fetchProtectedDataError(err));
+    });
+};

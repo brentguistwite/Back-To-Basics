@@ -4,14 +4,16 @@ import { Link, } from 'react-router-dom';
 import './header-bar.css';
 import { clearAuth, } from '../actions/auth';
 import { clearAuthToken, } from '../local-storage';
+import LoginForm from './login-form';
+
 
 export class HeaderBar extends React.Component {
-  logOut () {
+  logOut() {
     this.props.dispatch(clearAuth());
     clearAuthToken();
   }
 
-  render () {
+  render() {
     // Only render the log out button if we are logged in
     let logOutButton;
     if (this.props.loggedIn) {
@@ -19,9 +21,9 @@ export class HeaderBar extends React.Component {
         <a href="#" onClick={() => this.logOut()}>LOG OUT</a>
       );
     }
-    else{
+    else {
       logOutButton = (
-        <Link to="/register">SIGN UP</Link>
+        <Link to="/register">SIGN IN</Link>
       );
     }
     return (
@@ -36,6 +38,6 @@ export class HeaderBar extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({loggedIn: state.auth.currentUser !== null,});
+const mapStateToProps = state => ({ loggedIn: state.auth.currentUser !== null, });
 
 export default connect(mapStateToProps)(HeaderBar);

@@ -115,6 +115,9 @@
         "functions": "ignore"
       }
     ],
+    "no-unused-vars": [
+      1
+    ],
     "no-lonely-if": [
       0
     ],
@@ -123,10 +126,6 @@
     ],
     "space-before-blocks": [
       1
-    ],
-    "space-before-function-paren": [
-      "error",
-      "always"
     ],
     "arrow-parens": [
       1,

@@ -12,10 +12,10 @@ export const setAuthToken = authToken => ({
 });
 
 export const CLEAR_AUTH = 'CLEAR_AUTH';
-export const clearAuth = () => ({type: CLEAR_AUTH,});
+export const clearAuth = () => ({ type: CLEAR_AUTH, });
 
 export const AUTH_REQUEST = 'AUTH_REQUEST';
-export const authRequest = () => ({type: AUTH_REQUEST,});
+export const authRequest = () => ({ type: AUTH_REQUEST, });
 
 export const AUTH_SUCCESS = 'AUTH_SUCCESS';
 export const authSuccess = currentUser => ({
@@ -43,28 +43,28 @@ export const login = (username, password) => (dispatch) => {
   return (
     fetch(`${API_BASE_URL}/auth/login`, {
       method: 'POST',
-      headers: {'Content-Type': 'application/json',},
+      headers: { 'Content-Type': 'application/json', },
       body: JSON.stringify({
         username,
         password,
       }),
     })
-  // Reject any requests which don't return a 200 status, creating
-  // Errors which follow a consistent format
+      // Reject any requests which don't return a 200 status, creating
+      // Errors which follow a consistent format
       .then(res => normalizeResponseErrors(res))
       .then(res => res.json())
       .then(({ authToken, }) => storeAuthInfo(authToken, dispatch))
       .catch((err) => {
         const { code, } = err;
         const message =
-                    code === 401
-                      ? 'Incorrect username or password'
-                      : 'Unable to login, please try again';
+          code === 401
+            ? 'Incorrect username or password'
+            : 'Unable to login, please try again';
         dispatch(authError(err));
         // Could not authenticate, so return a SubmissionError for Redux
         // Form
         return Promise.reject(
-          new SubmissionError({_error: message,})
+          new SubmissionError({ _error: message, })
         );
       })
   );

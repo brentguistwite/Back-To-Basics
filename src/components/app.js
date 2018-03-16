@@ -9,7 +9,7 @@ import RegistrationPage from './registration-page';
 import { refreshAuthToken, } from '../actions/auth';
 
 export class App extends React.Component {
-  componentDidUpdate (prevProps) {
+  componentDidUpdate(prevProps) {
     if (!prevProps.loggedIn && this.props.loggedIn) {
       // When we are logged in, refresh the auth token periodically
       this.startPeriodicRefresh();
@@ -19,18 +19,18 @@ export class App extends React.Component {
     }
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     this.stopPeriodicRefresh();
   }
 
-  startPeriodicRefresh () {
+  startPeriodicRefresh() {
     this.refreshInterval = setInterval(
       () => this.props.dispatch(refreshAuthToken()),
       60 * 60 * 1000 // One hour
     );
   }
 
-  stopPeriodicRefresh () {
+  stopPeriodicRefresh() {
     if (!this.refreshInterval) {
       return;
     }
@@ -38,7 +38,7 @@ export class App extends React.Component {
     clearInterval(this.refreshInterval);
   }
 
-  render () {
+  render() {
     return (
       <div className="app">
         <HeaderBar />
