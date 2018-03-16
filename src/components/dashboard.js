@@ -15,12 +15,15 @@ export class Dashboard extends React.Component {
     const answer = this.input.value;
     if (this.props.buttonState === 'Submit') {
       this.props.dispatch(sendAnswerForValidation(answer));
+      this.input.disabled = true;
     } else {
       this.props.dispatch(fetchProtectedData());
+      this.input.disabled = false;
     }
     this.input.value = '';
     this.input.focus();
   }
+
 
   // BREAK THIS SPAGHETTI INTO SEPARATE COMPONENTS
   render() {
@@ -37,7 +40,6 @@ export class Dashboard extends React.Component {
     } else if (this.props.feedback === false) {
       feedback = `Incorrect, the answer is "${this.props.protectedData.answer}"`;
     }
-    console.log(feedback);
     if (!this.props.protectedData)
       return (
         <div className="dashboard">
@@ -47,7 +49,6 @@ export class Dashboard extends React.Component {
         </div>
       );
     else {
-      console.log(this.props.protectedData);
       return (
         <div className="dashboard">
           <div className="dashboard-protected-data">
@@ -58,7 +59,10 @@ export class Dashboard extends React.Component {
           </div>
           <div className="answer-section">
             <form onSubmit={(e) => { this.handleSubmit(e); }} >
-              <input ref={(input) => { this.input = input; }} />
+              <input
+                required
+                ref={(input) => { this.input = input; }}
+              />
               <br />
               {button}
             </form>
