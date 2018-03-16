@@ -52,8 +52,6 @@ export class Dashboard extends React.Component {
         <div className="dashboard">
           <div className="question">
             {this.props.protectedData.question}
-          </div>
-          <div className="feedback">
             {feedback}
           </div>
           <div className="answer-section">
@@ -65,7 +63,9 @@ export class Dashboard extends React.Component {
               <br />
               {button}
             </form>
-            Successful attempts: {feedback === 'Correct!'? this.props.timesCorrect + 1 : this.props.timesCorrect}<br/>
+          </div>
+          <div className="results">
+            Successful attempts: {feedback === 'Correct!' ? this.props.timesCorrect + 1 : this.props.timesCorrect}<br />
             Overall attempts: {!feedback ? this.props.timesSeen : this.props.timesSeen + 1}
           </div>
         </div>
