@@ -1,5 +1,5 @@
 # Back To Basics
-
+A front-end themed learning app which uses a unique spaced repetition inspired algorithm
 ## You can explore the app [here](https://clever-rosalind-0fcb2a.netlify.com/) 
 
 ## What does it do?
