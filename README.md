@@ -19,7 +19,7 @@ We seek to remedy that problem using the spaced repetition learning technique. O
 - Node
 - Express
 - Singly linked list data structure
-- GitHub
+- Git
 
 ## How it works
 - Our algorithm adds "weights" to questions so questions you answer correctly will decrease in frequency while ones you struggle with will be shown more often.
