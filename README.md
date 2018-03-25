@@ -1,6 +1,7 @@
 # Back To Basics
-A front-end themed learning app which uses a unique spaced repetition inspired algorithm
-## You can explore the app [here](https://backtobasics.netlify.com)
+A front-end themed learning app which uses a unique spaced repetition inspired algorithm.
+You can explore the app [here](https://backtobasics.netlify.com)
+## Log in
 Create your own account or user our demo account, the username is "demo" and the password is "password123".
 ## What does it do?
 As most new developers(and older ones) know all too well, learning the amount of information we do in the relatively short time span can be demanding. It becomes increasingly easy to forget about the front-end web development fundamentals.
